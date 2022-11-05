@@ -71,12 +71,14 @@ const submit = (e) => {
                 <input value={email} onChange={(e) => setEmail(e.target.value)} type="email"  className="form-input"   placeholder="Email" required/>
                 <input value={checkEmail} onChange={(e) => setCheckEmail(e.target.value)} type="Confirme Email"  className="form-input"   placeholder="Email" required/>
                 <input value={phone}onChange={(e) => setPhone(e.target.value)} type="number" className="form-input"   placeholder="Teléfono"required />
-
+                
 
             <div >
-            <button  className="botonSubmit" onClick = {submit}> Procesar Orden</button>
+            <br></br>
+            <button  className="btn btn-danger" onClick = {submit}> Procesar Orden</button>
             </div>
-            
+            <br></br>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/GuBI7jHN15U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         
             </form>

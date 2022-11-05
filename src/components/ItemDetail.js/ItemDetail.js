@@ -30,6 +30,7 @@ const ItemDetail = ({ id, name, img, description, price, stock }) => {
                     <section>
                        {stock !== 0 ? <ItemCount onAdd={handleOnAdd} stock={stock} initial={quantityAdded}/>: <p>Sin stock</p>}
                     </section>
+                    <br></br>
             </div>
         </div>
 

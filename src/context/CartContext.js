@@ -27,7 +27,7 @@ export const CartProvider = ({children}) => {
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: 'Your work has been saved',
+                title: 'Producto agregado a Carrito',
                 showConfirmButton: false,
                 timer: 1500
               })
@@ -49,6 +49,13 @@ export const CartProvider = ({children}) => {
     const removeItem = (id) => {
         const cartWithoutProduct = cart.filter(prod => prod.id !== id)
         setCart(cartWithoutProduct)
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Producto Removido de carrito',
+            showConfirmButton: false,
+            timer: 1500
+          })
     }
 
     const getQuantity = () => {
@@ -73,6 +80,13 @@ export const CartProvider = ({children}) => {
     
     const clearCart = () => {
       setCart ([])
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Carrito Vaciado',
+        showConfirmButton: false,
+        timer: 1500
+      })
     }
 
     const getProductQuantity = (id)=>{

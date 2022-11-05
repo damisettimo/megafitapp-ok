@@ -4,6 +4,7 @@ import { collection, getDocs, query, where, documentId, writeBatch, addDoc, Time
 import { db } from "../../services/firebase";
 import ClientForm from "../Form/Form";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Checkout = () => {
 
@@ -73,10 +74,22 @@ const Checkout = () => {
                 setTimeout(() => {
                     navigate('/')
                 }, 4000)
-
-                console.log(`El id de su orden es: ${orderAdded.id}`)
+                Swal.fire({
+                    title: "Muchas gracias por su compra",
+                    text:`El id de su orden es: ${orderAdded.id}`,
+                    icon: "success",
+                    buttons: true,
+                    dangerMode: true,
+                
+                })
             } else {
-                console.log("Algunos productos no se encuentran en stock")
+                Swal.fire({
+                    title: "Sin stock en algunos productos",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                
+                })           
             }
             
         } catch (error) {
@@ -96,13 +109,14 @@ const Checkout = () => {
     
     return (
         <div>    
-            <h2>Checkout de tu Compra</h2>
+            <h2 className="p-3 mb-2 bg-dark text-white" >Checkout de tu Compra</h2>
             <br></br>
             <h3>Completa con tus datos:</h3>
             <ClientForm completeDates={completeDates}/>
             { personalData 
-            ?<button className="botonCheckout" onClick={createOrder}>Generar Pedido</button> 
+            ?<button className="btn btn-danger" onClick={createOrder}>Generar Pedido</button> 
             : ""}
+            <br></br>
         </div>
     )
 
