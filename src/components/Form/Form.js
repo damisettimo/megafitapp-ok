@@ -10,7 +10,7 @@ export const FormData = createContext({
 })
 
 
-const ClientForm = ({completoDatos}) => {
+const ClientForm = ({completeDates}) => {
     
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
@@ -49,7 +49,7 @@ const submit = (e) => {
             icon: "success",
             buttons: true,
         })
-    completoDatos(
+    completeDates(
         name,
         surname,
         address,

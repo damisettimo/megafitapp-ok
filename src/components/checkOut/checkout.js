@@ -1,8 +1,9 @@
 import { useState, useContext } from "react";
 import { CartContext } from "../../context/CartContext";
-import { collection, getDocs, query, where, documentId, writeBatch, addDoc, } from "firebase/firestore"
+import { collection, getDocs, query, where, documentId, writeBatch, addDoc, Timestamp } from "firebase/firestore"
 import { db } from "../../services/firebase";
 import ClientForm from "../Form/Form";
+import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
 
@@ -12,12 +13,14 @@ const Checkout = () => {
     
             const [datosCompra, setDatosCompra] = useState({}) 
 
-    const completoDatos = (name, surname, address, phone, email) =>{
+    const completeDates = (name, surname, address, phone, email) =>{
             setDatosCompra({name, surname, address, phone, email})
             setPersonalData(true)
         }
 
-    const { cart, total } = useContext(CartContext)
+    const { cart, total, clearCart } = useContext(CartContext)
+
+    const navigate = useNavigate()
 
     const createOrder = async () => {
 
@@ -25,14 +28,10 @@ const Checkout = () => {
 
         try {
             const objOrder = {
-                buyer: {
-                    name: "jorge rod",
-                    phone: "341587896",
-                    mail: "jorgero@hotmail.com"
-                },
-        
-                item: cart,
-                total: total
+                buyer: datosCompra,
+                items: cart,
+                total: total,
+                date:Timestamp.fromDate(new Date())
             }
 
             const batch = writeBatch(db)
@@ -69,6 +68,12 @@ const Checkout = () => {
 
                 const orderAdded = await addDoc(orderRef, objOrder)
 
+                clearCart()
+
+                setTimeout(() => {
+                    navigate('/')
+                }, 4000)
+
                 console.log(`El id de su orden es: ${orderAdded.id}`)
             } else {
                 console.log("Algunos productos no se encuentran en stock")
@@ -94,7 +99,7 @@ const Checkout = () => {
             <h2>Checkout de tu Compra</h2>
             <br></br>
             <h3>Completa con tus datos:</h3>
-            <ClientForm completoDatos={completoDatos}/>
+            <ClientForm completeDates={completeDates}/>
             { personalData 
             ?<button className="botonCheckout" onClick={createOrder}>Generar Pedido</button> 
             : ""}
