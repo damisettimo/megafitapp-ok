@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDmpn_q4jtsRMeoBgu6rPJtmMFpdMoMajM",
-  authDomain: "megafit-backend.firebaseapp.com",
-  projectId: "megafit-backend",
-  storageBucket: "megafit-backend.appspot.com",
-  messagingSenderId: "740224167282",
-  appId: "1:740224167282:web:8677bf00dd06aa3e1041eb"
+  apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain ,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_appId
 };
 
 // Initialize Firebase
